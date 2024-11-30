@@ -1,12 +1,15 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable react-hooks/exhaustive-deps */
 // eslint-disable-next-line no-unused-vars
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/assets";
+import RelatedProducts from "../components/RelatedProducts";
 
 const Product = () => {
   const { productId } = useParams();
-  const { products, currency } = useContext(ShopContext);
+  const { products, currency, addToCart } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState("");
   const [size, setSize] = useState("");
@@ -27,9 +30,9 @@ const Product = () => {
 
   return productData ? (
     <div className="border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100">
-      {/* xxxxxxxxxxxxxxxxxxxxxxxx Product Data xxxxxxxxxxxxxxxxxxxxxxxxxxxxx */}
+      {/* xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx Product Data xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */}
       <div className="flex gap-12 sm:gap-12 flex-col sm:flex-row">
-        {/* -------------------- Product Images ----------------------- */}
+        {/* ------------------------------------------------------ Product Images ----------------------------------------------- */}
         <div className="flex-1 flex flex-col-reverse gap-3 sm:flex-row">
           <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full">
             {productData.image.map((item, index) => (
@@ -80,7 +83,7 @@ const Product = () => {
               ))}
             </div>
           </div>
-          <button className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700">
+          <button onClick={() => addToCart(productData._id, size)} className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700">
             ADD TO CART
           </button>
           <hr className="mt-8 sm:w-4/5" />
@@ -98,7 +101,20 @@ const Product = () => {
           <b className="border px-5 py-3 text-sm">Description</b>
           <p className="border px-5 py-3 text-sm">Reviews (122)</p>
         </div>
+        <div className="flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500">
+          <p>
+            An e-commerce website is an online platform that facilitates the buying and selling of products or services over the internet. It serves as the virtual equivalent of a physical store, allowing businesses to sell their products online and customers to purchase them without having to visit a physical location. The popularity of e-commerce websites has grown exponentially in recent years, with millions of people around the world now shopping online regularly. E-commerce websites are typically designed to be user-friendly and intuitive, making it easy for customers to browse products, add them to their cart, and make a purchase with just a few clicks of the mouse. They often feature a wide range of products from various categories, allowing customers to find exactly what they're looking for quickly and easily. E-commerce websites also offer a variety of payment options, including credit card, debit card, and PayPal, making it convenient for customers to pay for their purchases in a way that suits them best.
+          </p>
+          <p>
+            E-commerce websites have become increasingly popular in recent years as more and more people turn to the internet to shop for goods and services. They offer a convenient and efficient way to browse and purchase products from the comfort of your own home, and many people prefer shopping online to visiting physical stores.
+          </p>
+        </div>
       </div>
+
+      {/* ################################################### Related Products ###################################################### */}
+
+<RelatedProducts category={productData.category} subCategory={productData.subCategory} />
+
     </div>
   ) : (
     <div className="opacity-0"></div>
