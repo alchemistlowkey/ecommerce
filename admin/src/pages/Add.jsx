@@ -20,8 +20,11 @@ const Add = ({ token }) => {
   const [bestseller, setBestseller] = useState(false);
   const [sizes, setSizes] = useState([]);
 
+  const [loading, setLoading] = useState(false);
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const formData = new FormData();
@@ -47,8 +50,8 @@ const Add = ({ token }) => {
 
       if (response.data.success) {
         toast.success(response.data.message);
-        setName("");
-        setDescription("");
+        // setName("");
+        // setDescription("");
         setPrice("");
         setImage1(false);
         setImage2(false);
@@ -60,6 +63,8 @@ const Add = ({ token }) => {
     } catch (error) {
       console.log(error);
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -295,8 +300,8 @@ const Add = ({ token }) => {
         </label>
       </div>
 
-      <button type="submit" className="w-28 py-3 mt-4 bg-black text-white">
-        ADD
+      <button type="submit" className="w-28 py-3 mt-4 bg-black text-white" disabled={loading}>
+        {loading ? "ADDING..." : "ADD"}
       </button>
     </form>
   );
