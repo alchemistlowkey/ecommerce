@@ -18,7 +18,7 @@ const Contact = () => {
           <p className='text-gray-500 font-semibold'>Tel: (234) 802 751 3561 <br /> Email: fullstackdev@luckysamuel.me</p>
           <p className='text-gray-600 font-semibold text-xl'>Careers</p>
           <p className='text-gray-500 font-semibold'>Learn more about our teams and job openings</p>
-          <button className='border border-black px-8 py-4 text-sm hover:bg-black hover:text-white transition-all duration-500'>Explore Jobs</button>
+          <button className='border border-black px-8 py-4 text-sm hover:bg-black hover:text-white hover:rounded-full transition-all duration-500'>Explore Jobs</button>
         </div>
       </div>
 
